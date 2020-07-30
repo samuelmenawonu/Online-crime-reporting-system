@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once('Connection.php');
-require_once('Reporter.php');
-require_once('Photo.php');
+require_once('models/Connection.php');
+require_once('models/Reporter.php');
+require_once('models/Photo.php');
 
 $_SESSION["msg"] = "Complaint successfully sent"; 
 
@@ -14,7 +14,7 @@ if (isset($_POST["submit"]) && !empty($_FILES['evid']['name'])){
    */    
 
    $photo->attach_file();
-
+ 
       if ($photo->exists()) {
 
             $_SESSION["msg"] = "Sorry, file already exists. Upload another file or change the name of the file";
@@ -33,7 +33,7 @@ if (isset($_POST["submit"]) && !empty($_FILES['evid']['name'])){
 
                //saving form data into database 
                $crime =$report->create($_POST);
-                 $conn->query($crime);
+                 $conn->query($crime); 
                    $crime_id= $conn->getLastId();
 
             }
